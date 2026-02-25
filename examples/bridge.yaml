@@ -1,0 +1,34 @@
+# Bridge Mode Configuration
+# Wi-FiとEthernetを1つのネットワークとしてブリッジ接続します
+# クライアントはWi-Fi経由でもEthernet経由でも同一サブネットに参加できます
+
+mode: "bridge"
+
+# Wi-Fi Settings
+ssid: "Oiduna-Network"
+password: "change-this-password"  # 8文字以上の強力なパスワードを設定してください
+
+# Network Settings
+subnet: "192.168.4.0/24"
+gateway_ip: "192.168.4.1"
+dhcp_range_start: "192.168.4.10"
+dhcp_range_end: "192.168.4.100"
+
+# Local DNS Hostnames
+local_hostnames:
+  - "oiduna.local"
+  - "oiduna-server.local"
+
+# Interface Configuration
+# `ip link` コマンドで確認可能
+upstream_interface: "eth0"      # インターネット接続用(有線LAN) ※オプション
+wifi_interface: "wlan0"         # Wi-Fiアダプタ(br0にブリッジ)
+ethernet_interface: "eth1"      # クライアント接続用(br0にブリッジ)
+
+# Note: ブリッジモードでインターネット接続が必要な場合、
+#       USB-Ethernetアダプタなどで3つ目のネットワークインターフェースが必要です
+#       クローズドLAN(インターネット接続不要)として運用する場合は upstream_interface は不要です
+
+# Note: Wi-Fiアダプタは必ずAPモード対応でかつブリッジモード対応である必要があります
+#       一部のWi-Fiドライバはブリッジモードに対応していません
+#       推奨チップセット: Atheros AR9271

@@ -1,0 +1,27 @@
+# Wi-Fi Only Mode Configuration
+# Ubuntu PCがWi-Fiアクセスポイントとして動作し、クライアントはWi-Fi経由で接続します
+
+mode: "wifi_only"
+
+# Wi-Fi Settings
+ssid: "Oiduna-Network"
+password: "change-this-password"  # 8文字以上の強力なパスワードを設定してください
+
+# Network Settings
+subnet: "10.42.0.0/24"
+gateway_ip: "10.42.0.1"
+dhcp_range_start: "10.42.0.10"
+dhcp_range_end: "10.42.0.100"
+
+# Local DNS Hostnames
+local_hostnames:
+  - "oiduna.local"
+  - "oiduna-server.local"
+
+# Interface Configuration
+# `ip link` コマンドで確認可能
+upstream_interface: "eth0"    # インターネット接続用(有線LAN)
+wifi_interface: "wlan0"       # Wi-Fiアダプタ(アクセスポイント用)
+
+# Note: Wi-Fiアダプタは必ずAPモード対応である必要があります
+# 確認コマンド: iw list | grep -A 10 "Supported interface modes"

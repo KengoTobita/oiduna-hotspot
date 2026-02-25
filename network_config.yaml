@@ -1,0 +1,46 @@
+# Oiduna Network Setup Configuration
+# Ubuntu PCをWi-Fiアクセスポイント化するための設定ファイル
+
+# ネットワークモード: "wifi_only", "ethernet_only", "bridge"
+# - wifi_only: Wi-Fi APのみ（デフォルト）
+# - ethernet_only: 有線LANのみ（Wi-Fi未使用）
+# - bridge: Wi-Fi APと有線LANをブリッジ接続（同一サブネット）
+mode: "wifi_only"
+
+# Wi-Fi SSID（ネットワーク名）
+ssid: "Oiduna-Network"
+
+# Wi-Fiパスワード（8文字以上推奨）
+# セキュリティのため、強力なパスワードを設定してください
+password: "change-this-password"
+
+# サブネット（NetworkManagerホットスポット使用時は自動的に10.42.0.0/24になります）
+subnet: "10.42.0.0/24"
+
+# ゲートウェイIP（Ubuntu PCのIPアドレス）
+gateway_ip: "10.42.0.1"
+
+# DHCPレンジ（NetworkManager使用時は自動設定）
+dhcp_range_start: "10.42.0.10"
+dhcp_range_end: "10.42.0.100"
+
+# ローカルDNSホスト名（クライアントからこのホスト名でアクセス可能）
+local_hostnames:
+  - "oiduna.local"
+  - "oiduna-server.local"
+
+# 上流インターフェース（インターネット接続用、有線LAN）
+# eth0, eno1, enp3s0 などの有線LANインターフェース名を指定
+# `ip link` コマンドで確認可能
+upstream_interface: "eth0"
+
+# Wi-Fiインターフェース（ホットスポット用）
+# wlan0, wlp2s0 などのWi-Fiインターフェース名を指定
+# `ip link` コマンドで確認可能
+wifi_interface: "wlan0"
+
+# Ethernetインターフェース（有線LAN用、bridgeモードまたはethernet_onlyモード時に使用）
+# eth1, enp0s31f6 などのEthernetインターフェース名を指定
+# `ip link` コマンドで確認可能
+# 注意: upstream_interfaceとは異なるインターフェースを指定してください
+ethernet_interface: "eth1"

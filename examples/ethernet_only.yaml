@@ -1,0 +1,23 @@
+# Ethernet Only Mode Configuration
+# Ubuntu PCが有線LANアダプタ経由でクライアントに接続を提供します(Wi-Fi未使用)
+
+mode: "ethernet_only"
+
+# Network Settings
+subnet: "192.168.4.0/24"
+gateway_ip: "192.168.4.1"
+dhcp_range_start: "192.168.4.10"
+dhcp_range_end: "192.168.4.100"
+
+# Local DNS Hostnames
+local_hostnames:
+  - "oiduna.local"
+  - "oiduna-server.local"
+
+# Interface Configuration
+# `ip link` コマンドで確認可能
+upstream_interface: "eth0"      # インターネット接続用(有線LAN)
+ethernet_interface: "eth1"      # クライアント接続用(有線LAN)
+
+# Note: upstream_interface と ethernet_interface は異なるアダプタである必要があります
+# 通常、eth1 は USB-Ethernetアダプタなどの追加アダプタになります
